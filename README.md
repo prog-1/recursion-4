@@ -113,4 +113,4 @@ func GenParentheses(n int, f func(string)) {
 
 ### Exercise
 
-Implement recursive `GenParentheses` for `()[]{}`.
+Implement recursive `GenParentheses` for `()[]{}` set of parentheses.
