@@ -60,6 +60,11 @@ Correct
 https://go.dev/play/p/j6jWlQ_IkTw
 
 ```go
+const (
+	openParentheses  = "([{"
+	closeParentheses = ")]}"
+)
+
 // CorrectParentheses checks whether parentheses are correct in s.
 func CorrectParentheses(s string) bool {
 	var opened []int // Stack, last in - first out (LIFO).
