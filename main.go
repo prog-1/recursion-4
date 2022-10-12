@@ -79,10 +79,13 @@ func GenParentheses(n int, f func(string)) {
 	gen(0, 0, "")
 }
 
-func PrintVariants(s string) {
-	if CorrectParentheses(s) {
-		fmt.Println(">>>", s)
-	}
+func GenBrackets(i int) (res []string) {
+	GenParentheses(i, func(s string) {
+		if CorrectParentheses(s) {
+			res = append(res, s)
+		}
+	})
+	return
 }
 
 // func getAllBracketVareants(s string) []string {
@@ -90,5 +93,5 @@ func PrintVariants(s string) {
 // }
 
 func main() {
-	GenParentheses(2, PrintVariants)
+	fmt.Println(GenBrackets(2))
 }
