@@ -93,5 +93,5 @@ func GenBrackets(i int) (res []string) {
 // }
 
 func main() {
-	fmt.Println(GenBrackets(2))
+	fmt.Println(GenBrackets(3))
 }
