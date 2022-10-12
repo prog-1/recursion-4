@@ -72,8 +72,8 @@ func GenParentheses(n int, f func(string)) {
 		}
 		if o > c {
 			gen(o, c+1, s+")")
-			gen(o+1, c, s+"}")
-			gen(o+1, c, s+"]")
+			gen(o, c+1, s+"}")
+			gen(o, c+1, s+"]")
 		}
 	}
 	gen(0, 0, "")
