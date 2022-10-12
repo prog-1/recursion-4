@@ -58,6 +58,37 @@ func check(s string) int {
 
 }
 
+func GenParentheses(n int, f func(string)) {
+	var gen func(o, c int, s string)
+	gen = func(o, c int, s string) {
+		if o+c == 2*n {
+			f(s)
+			return
+		}
+		if o < n {
+			gen(o+1, c, s+"(")
+			gen(o+1, c, s+"{")
+			gen(o+1, c, s+"[")
+		}
+		if o > c {
+			gen(o, c+1, s+")")
+			gen(o+1, c, s+"}")
+			gen(o+1, c, s+"]")
+		}
+	}
+	gen(0, 0, "")
+}
+
+func PrintVariants(s string) {
+	if CorrectParentheses(s) {
+		fmt.Println(">>>", s)
+	}
+}
+
+// func getAllBracketVareants(s string) []string {
+// 	var
+// }
+
 func main() {
-	fmt.Println(CorrectParentheses("{({})}{}"))
+	GenParentheses(2, PrintVariants)
 }
