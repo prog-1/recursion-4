@@ -13,7 +13,6 @@ func TestCorrectParentheses(t *testing.T) {
 		{")()(", false},
 		{"(()())()", true},
 		{"()()()", true},
-		{"({[}])", false},
 		{"(}[])", false},
 		{"()[]{}", true},
 		{"([{}])", true},

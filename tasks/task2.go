@@ -1,55 +1,55 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-const (
-	open  = "([{"
-	close = ")]}"
-)
-
 // CorrectParentheses checks whether parentheses are correct in s.
 func CorrectParentheses(s string) bool {
-	var cnt int
-	var cor func(s string, i int, cnt *int) (bool, int, int)
-	cor = func(s string, i int, cnt *int) (bool, int, int) {
-		if i > len(s)-1 {
-			return *cnt == 0, -1, -1
-		}
-		r := rune(s[i])
-		if x := strings.IndexRune(open, r); x > -1 {
-			*cnt++
-			_, z, c := cor(s, i+1, cnt)
-			if x != z {
-				return false, -1, -1
-			}
-			return cor(s, c, cnt)
-		}
-		if x := strings.IndexRune(close, r); x > -1 {
-			*cnt--
-			return false, x, i + 1
-		}
-		return false, 0, 0
+	sl := make([]string, 0)
+	for i := 0; i < len(s); i++ {
+		sl = append(sl, string(s[i]))
 	}
-
-	res, _, _ := cor(s, 0, &cnt)
+	var cor func(sl []string) ([]string, bool)
+	cor = func(sl []string) ([]string, bool) {
+		if len(sl) == 0 {
+			return sl, true
+		}
+		if sl[0] == "(" || sl[0] == "[" || sl[0] == "{" {
+			for i := 0; i < len(sl); i++ {
+				if sl[i] == ")" {
+					sl = append(sl[:i], sl[i+1:]...)
+					sl = sl[1:]
+					return cor(sl)
+				}
+				if sl[i] == "]" {
+					sl = append(sl[:i], sl[i+1:]...)
+					sl = sl[1:]
+					return cor(sl)
+				}
+				if sl[i] == "}" {
+					sl = append(sl[:i], sl[i+1:]...)
+					sl = sl[1:]
+					return cor(sl)
+				}
+			}
+		} else {
+			return sl, false
+		}
+		return sl, false
+	}
+	_, res := cor(sl)
 	return res
 
 }
 
-func main() {
-	for _, s := range []string{
-		"(()())(",
-		")()(",
-		"({[}])",
-		"(}[])",
-		"(()())()",
-		"()()()",
-		"()[]{}",
-		"([{}])",
-	} {
-		fmt.Println(CorrectParentheses(s), s)
-	}
-}
+// func main() {
+// 	for _, s := range []string{
+// 		"(()())(",
+// 		")()(",
+// 		"({[}])",
+// 		"(}[])",
+// 		"(()())()",
+// 		"()()()",
+// 		"()[]{}",
+// 		"([{}])",
+// 	} {
+// 		fmt.Println(CorrectParentheses(s), s)
+// 	}
+// }
